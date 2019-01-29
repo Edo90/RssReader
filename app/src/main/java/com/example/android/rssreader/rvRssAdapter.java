@@ -6,8 +6,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.android.rssreader.model.RSSModel;
 
@@ -27,8 +27,16 @@ public class rvRssAdapter extends RecyclerView.Adapter<rvRssAdapter.rssViewHolde
         return new rssViewHolder(itemView);
     }
 
+    //TODO: Open Fragment when clicked
     @Override
     public void onBindViewHolder(@NonNull rssViewHolder rssViewHolder, int i) {
+        final int position = i;
+        rssViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(v.getContext(),"this is the item number "+position, Toast.LENGTH_SHORT).show();
+            }
+        });
         if(rssModelList != null){
             RSSModel current = rssModelList.get(i);
             rssViewHolder.rssTitleView.setText(current.getName());

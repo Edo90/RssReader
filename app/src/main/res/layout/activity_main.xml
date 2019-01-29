@@ -13,12 +13,13 @@
         android:layout_height="match_parent"
         tools:listitem="@layout/recycler_view_rss_item" />
 
-    <android.support.v4.widget.CircleImageView
+    <Button
         android:layout_width="50dp"
         android:layout_height="50dp"
+        android:id="@+id/rbAddNewFeed"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        android:src="@mipmap/ic_launcher"
+        android:background="@mipmap/ic_launcher_round"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 </android.support.constraint.ConstraintLayout>

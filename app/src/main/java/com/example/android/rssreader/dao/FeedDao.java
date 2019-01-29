@@ -19,7 +19,7 @@ public interface FeedDao{
     @Update
     void update(FeedModel Model);
     @Delete
-    void delete(FeedModel id);
+    void delete();
 
     @Query("SELECT * FROM FEED_TABLE")
     List<FeedModel> getAllFeeds();

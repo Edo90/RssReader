@@ -10,11 +10,11 @@ import com.example.android.rssreader.repository.rssRepository;
 
 import java.util.List;
 
-public class rssViewModel extends AndroidViewModel {
+public class RssViewModel extends AndroidViewModel {
     private rssRepository repository;
     private LiveData<List<RSSModel>> rssList;
 
-    public rssViewModel(@NonNull Application application) {
+    public RssViewModel(@NonNull Application application) {
         super(application);
         this.repository = new rssRepository(application);
         this.rssList = repository.getListRssModel();
