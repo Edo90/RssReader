@@ -9,10 +9,9 @@ import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 
 import com.example.android.rssreader.dao.RssDao;
-import com.example.android.rssreader.model.FeedModel;
 import com.example.android.rssreader.model.RSSModel;
 
-@Database(entities = {FeedModel.class, RSSModel.class}, version = 1)
+@Database(entities = {RSSModel.class}, version = 2)
 public abstract class RssRoomDataBase extends RoomDatabase {
   //  public abstract FeedModel feedModel();
     public abstract RssDao rssDao();
@@ -24,7 +23,9 @@ public abstract class RssRoomDataBase extends RoomDatabase {
             synchronized (RssRoomDataBase.class){
                 if(INSTANCE == null){
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),RssRoomDataBase.class,"rss_database")
-                            .addCallback(sRoomDataBaseCallback).build();
+                            .addCallback(sRoomDataBaseCallback)
+                            .fallbackToDestructiveMigration()
+                            .build();
                 }
             }
         }
@@ -62,4 +63,5 @@ public abstract class RssRoomDataBase extends RoomDatabase {
             return null;
         }
     }
+
 }

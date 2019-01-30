@@ -6,6 +6,16 @@ public class FeedDto implements Serializable {
     String name;
     String link;
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    String description;
+
     public String getName() {
         return name;
     }

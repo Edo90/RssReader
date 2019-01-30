@@ -1,13 +1,13 @@
 package com.example.android.rssreader;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.android.rssreader.model.RSSModel;
 
@@ -17,8 +17,12 @@ public class rvRssAdapter extends RecyclerView.Adapter<rvRssAdapter.rssViewHolde
 
     private final LayoutInflater layoutInflater;
     private List<RSSModel> rssModelList;
+    private Context mainContext;
 
-    rvRssAdapter(Context context){layoutInflater = LayoutInflater.from(context);}
+
+    rvRssAdapter(Context context){
+        mainContext = context;
+        layoutInflater = LayoutInflater.from(context);}
 
     @NonNull
     @Override
@@ -27,22 +31,28 @@ public class rvRssAdapter extends RecyclerView.Adapter<rvRssAdapter.rssViewHolde
         return new rssViewHolder(itemView);
     }
 
-    //TODO: Open Fragment when clicked
+
     @Override
     public void onBindViewHolder(@NonNull rssViewHolder rssViewHolder, int i) {
         final int position = i;
-        rssViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(v.getContext(),"this is the item number "+position, Toast.LENGTH_SHORT).show();
-            }
-        });
+        setListener(rssViewHolder, position);
         if(rssModelList != null){
             RSSModel current = rssModelList.get(i);
             rssViewHolder.rssTitleView.setText(current.getName());
         } else{
             rssViewHolder.rssTitleView.setText("Sin Titulo");
         }
+    }
+
+    private void setListener(@NonNull rssViewHolder rssViewHolder, final int position) {
+        rssViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mainContext,NewsActivity.class);
+                intent.putExtra("link",rssModelList.get(position).getLink());
+                mainContext.startActivity(intent);
+            }
+        });
     }
 
     void insertRss(List<RSSModel> model){

@@ -1,64 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:padding="6dp"
     tools:context=".NewFeed">
+
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:padding="8dp"
         android:orientation="vertical">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="sans-serif-smallcaps"
             android:layout_marginLeft="16dp"
-            android:textSize="12sp"
-            android:text="Nombre:"/>
+            android:fontFamily="sans-serif-smallcaps"
+            android:layout_marginBottom="6dp"
+            android:text="Nombre:"
+            android:textSize="16sp" />
+
         <EditText
+            android:id="@+id/etName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/etName"
+            android:layout_marginBottom="6dp"
             android:background="@android:color/darker_gray"
-            android:textColor="@android:color/primary_text_dark"
-            android:paddingLeft="16dp"
             android:fontFamily="sans-serif-smallcaps"
-            android:textSize="16sp"
-            tools:text="esto es una prueba de como se vera"/>
+            android:hint="News"
+            android:paddingLeft="16dp"
+            android:textColor="@android:color/primary_text_dark"
+            android:textSize="14sp"
+            tools:text="esto es una prueba de como se vera" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="sans-serif-smallcaps"
             android:layout_marginLeft="16dp"
-            android:textSize="12sp"
-            android:text="Link:"/>
+            android:fontFamily="sans-serif-smallcaps"
+            android:text="Link:"
+            android:textSize="16sp" />
+
+
         <EditText
+            android:id="@+id/etLink"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/etLink"
             android:background="@android:color/darker_gray"
-            android:textColor="@android:color/primary_text_dark"
-            android:paddingLeft="16dp"
+            android:layout_marginBottom="6dp"
             android:fontFamily="sans-serif-smallcaps"
-            android:textSize="16sp"
-            tools:text="https://"/>
+            android:hint="https://"
+            android:paddingLeft="16dp"
+            android:textColor="@android:color/primary_text_dark"
+            android:textSize="14sp"
+            tools:text="https://" />
 
 
     </LinearLayout>
 
-    <ImageButton
-        android:layout_width="30dp"
+
+    <Button
+        android:id="@+id/bSaveRss"
+        android:layout_width="wrap_content"
         android:layout_height="30dp"
-        android:id="@+id/ibSaveRss"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:src="@mipmap/ic_launcher_round"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginEnd="148dp"
+        android:background="@color/design_default_color_primary"
+        android:text="Guardar"
+        android:textColor="@android:color/white"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 </android.support.constraint.ConstraintLayout>

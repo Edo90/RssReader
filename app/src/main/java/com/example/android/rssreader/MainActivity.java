@@ -36,7 +36,6 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-
         rssViewModel = ViewModelProviders.of(this).get(RssViewModel.class);
 
         rssViewModel.getRssList().observe(this, new Observer<List<RSSModel>>() {
