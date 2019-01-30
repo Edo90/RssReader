@@ -2,12 +2,11 @@ package com.example.android.rssreader;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.example.android.rssreader.dto.FeedDto;
@@ -18,7 +17,7 @@ public class NewFeed extends AppCompatActivity {
 
     private EditText mNameView;
     private EditText mLinkView;
-    private ImageButton ibSaveRss;
+    private Button bSaveRss;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,31 +26,65 @@ public class NewFeed extends AppCompatActivity {
 
         mNameView = findViewById(R.id.etName);
         mLinkView = findViewById(R.id.etLink);
-        ibSaveRss = findViewById(R.id.ibSaveRss);
+        bSaveRss = findViewById(R.id.bSaveRss);
 
-        ibSaveRss.setOnClickListener(new View.OnClickListener() {
+        bSaveRss.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent replyIntent = new Intent(getApplicationContext(),MainActivity.class);
-                if(TextUtils.isEmpty(mLinkView.getText()) || TextUtils.isEmpty(mNameView.getText())){
-                    setResult(RESULT_CANCELED,replyIntent);
-                }else{
-                    String name, link;
-                    name = mNameView.getText().toString();
-                    link = mLinkView.getText().toString();
-
-                    FeedDto feedDto = new FeedDto(name,link);
-                    replyIntent.putExtra(EXTRA_REPLY,feedDto);
+                Intent replyIntent = new Intent(getApplicationContext(), MainActivity.class);
+                String link = setHttpCorrectForm(mLinkView.getText().toString());
+                String name = mNameView.getText().toString();
+                if (TextUtils.isEmpty(mLinkView.getText()) || TextUtils.isEmpty(mNameView.getText())) {
+                    setResult(RESULT_CANCELED, replyIntent);
+                    Toast.makeText(NewFeed.this, "Los campos no deben estar vacios", Toast.LENGTH_SHORT).show();
+                } else {
+                    FeedDto feedDto = new FeedDto(name, link);
+                    replyIntent.putExtra(EXTRA_REPLY, feedDto);
                     setResult(RESULT_OK, replyIntent);
+                    finish();
                 }
-                finish();
+
             }
         });
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        Toast.makeText(this, "klk wawawa", Toast.LENGTH_SHORT).show();
+    private String setHttpCorrectForm(String link) {
+
+        if (!link.startsWith("http://") || !link.startsWith("https://")) {
+            return "http://" + link.toLowerCase();
+        } else {
+            return link;
+        }
+
     }
+
+//    private class ValidateLink extends AsyncTask<String,Void,Boolean> {
+//
+//        @Override
+//        protected Boolean doInBackground(String... strings) {
+//            try {
+//                HttpURLConnection conn = (HttpURLConnection) new URL(strings[0]).openConnection();
+//                conn.setUseCaches(false);
+//                //  conn.connect();
+//                int status = conn.getResponseCode();
+//                conn.disconnect();
+//                if(status == 200){
+//                    return true;
+//                }else {
+//                    return false;
+//                }
+//
+//            } catch (MalformedURLException e) {
+//                e.printStackTrace();
+//                return false;
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//                return false;
+//            } catch (Exception e){
+//                e.printStackTrace();
+//                return false;
+//            }
+//        }
+//
+//    }
 }

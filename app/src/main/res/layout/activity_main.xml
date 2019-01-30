@@ -14,12 +14,12 @@
         tools:listitem="@layout/recycler_view_rss_item" />
 
     <Button
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:id="@+id/rbAddNewFeed"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        android:background="@mipmap/ic_launcher_round"
+        android:background="@drawable/ic_add_vector"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 </android.support.constraint.ConstraintLayout>
