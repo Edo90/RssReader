@@ -28,6 +28,23 @@ public class rssRepository {
         new insertASyncTask(rssDao).execute(rssModel);
     }
 
+    public void delete(int id){ new deleteASyncTask(rssDao).execute(id);}
+
+    private static class deleteASyncTask extends AsyncTask<Integer,Void,Void>{
+
+        private RssDao aSyncTaskDao;
+
+        @Override
+        protected Void doInBackground(Integer... integers) {
+            aSyncTaskDao.delete(integers[0]);
+            return null;
+        }
+
+        public deleteASyncTask(RssDao aSyncTaskDao) {
+            this.aSyncTaskDao = aSyncTaskDao;
+        }
+    }
+
     private static class insertASyncTask extends AsyncTask<RSSModel,Void,Void> {
 
         private RssDao aSyncTaskDao;

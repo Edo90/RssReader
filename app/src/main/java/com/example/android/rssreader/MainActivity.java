@@ -32,11 +32,12 @@ public class MainActivity extends AppCompatActivity {
 
         RecyclerView recyclerView = findViewById(R.id.recyclerview);
         rbAddNewFeed = findViewById(R.id.rbAddNewFeed);
-        final rvRssAdapter adapter = new rvRssAdapter(this);
+        rssViewModel = ViewModelProviders.of(this).get(RssViewModel.class);
+
+
+        final rvRssAdapter adapter = new rvRssAdapter(this,rssViewModel);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-        rssViewModel = ViewModelProviders.of(this).get(RssViewModel.class);
 
         rssViewModel.getRssList().observe(this, new Observer<List<RSSModel>>() {
             @Override

@@ -53,7 +53,7 @@ public abstract class RssRoomDataBase extends RoomDatabase {
 
         @Override
         protected Void doInBackground(Void... voids) {
-            mRssDao.delete();
+            //mRssDao.delete();
             RSSModel rssModel = new RSSModel("https://www.diariolibre.com/rss/portada.xml","Diario Libre");
             mRssDao.insert(rssModel);
 

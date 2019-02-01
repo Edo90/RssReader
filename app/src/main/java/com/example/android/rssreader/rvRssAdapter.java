@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.android.rssreader.model.RSSModel;
+import com.example.android.rssreader.viewmodel.RssViewModel;
 
 import java.util.List;
 
@@ -18,10 +19,12 @@ public class rvRssAdapter extends RecyclerView.Adapter<rvRssAdapter.rssViewHolde
     private final LayoutInflater layoutInflater;
     private List<RSSModel> rssModelList;
     private Context mainContext;
+    private RssViewModel rssViewModel;
 
 
-    rvRssAdapter(Context context){
+    rvRssAdapter(Context context, RssViewModel rssViewModel){
         mainContext = context;
+        this.rssViewModel = rssViewModel;
         layoutInflater = LayoutInflater.from(context);}
 
     @NonNull
@@ -51,6 +54,15 @@ public class rvRssAdapter extends RecyclerView.Adapter<rvRssAdapter.rssViewHolde
                 Intent intent = new Intent(mainContext,NewsActivity.class);
                 intent.putExtra("link",rssModelList.get(position).getLink());
                 mainContext.startActivity(intent);
+            }
+        });
+
+        rssViewHolder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                final int id = position + 1;
+                rssViewModel.delete(id);
+                return false;
             }
         });
     }

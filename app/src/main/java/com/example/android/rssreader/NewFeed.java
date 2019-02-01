@@ -50,7 +50,7 @@ public class NewFeed extends AppCompatActivity {
 
     private String setHttpCorrectForm(String link) {
 
-        if (!link.startsWith("http://") || !link.startsWith("https://")) {
+        if (!link.startsWith("http://") && !link.startsWith("https://")) {
             return "http://" + link.toLowerCase();
         } else {
             return link;

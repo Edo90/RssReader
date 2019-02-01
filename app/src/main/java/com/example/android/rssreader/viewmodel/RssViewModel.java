@@ -24,5 +24,9 @@ public class RssViewModel extends AndroidViewModel {
         return rssList;
     }
 
+    public void delete(int id){
+        repository.delete(id);
+    }
+
     public void insert(RSSModel rssModel){ repository.insert(rssModel);}
 }

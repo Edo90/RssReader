@@ -18,8 +18,8 @@ public interface RssDao{
     @Update
     void update(RSSModel Model);
 
-    @Query("DELETE FROM RSS_Table")
-    void delete();
+    @Query("DELETE FROM RSS_Table WHERE ID = :id")
+    void delete(int id);
 
 
     @Query("SELECT * FROM RSS_Table")
