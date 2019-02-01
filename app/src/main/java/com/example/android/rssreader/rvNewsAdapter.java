@@ -20,7 +20,6 @@ public class rvNewsAdapter extends RecyclerView.Adapter<NewsViewHolder> {
 
     void insert(List<FeedModel> model){
         newsList = model;
-        notifyDataSetChanged();
     }
 
     @NonNull
@@ -32,7 +31,7 @@ public class rvNewsAdapter extends RecyclerView.Adapter<NewsViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull NewsViewHolder newsViewHolder, final int i) {
-        if(newsList == null){
+        if(!newsList.isEmpty()){
             FeedModel current = newsList.get(i);
             newsViewHolder.tvTitle.setText(current.getTitle());
             newsViewHolder.tvDescription.setText(current.getDescription());

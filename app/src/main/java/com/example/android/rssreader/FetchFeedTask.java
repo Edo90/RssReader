@@ -1,5 +1,6 @@
 package com.example.android.rssreader;
 
+import android.content.Context;
 import android.os.AsyncTask;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -22,11 +23,13 @@ class FetchFeedTask extends AsyncTask<Void,Void,Boolean> {
     private RecyclerView rvNews;
     private rvNewsAdapter rvNewsAdapter;
     private List<FeedModel> feedModelList;
+    private Context context;
 
-    public FetchFeedTask(String urlLink, RecyclerView rvNews, rvNewsAdapter adapter) {
+    public FetchFeedTask(String urlLink, RecyclerView rvNews, rvNewsAdapter adapter, Context newsActivity) {
         this.urlLink = urlLink;
         this.rvNews = rvNews;
         this.rvNewsAdapter = adapter;
+        this.context = newsActivity;
     }
 
     //TODO:Recordar colocar el swipelayoute true
@@ -38,9 +41,9 @@ class FetchFeedTask extends AsyncTask<Void,Void,Boolean> {
     @Override
     protected void onPostExecute(Boolean success) {
         if(success){
-
-            rvNewsAdapter.insert(feedModelList);
-            rvNews.setAdapter(rvNewsAdapter);
+            rvNewsAdapter adapter = new rvNewsAdapter(context);
+            adapter.insert(feedModelList);
+            rvNews.setAdapter(adapter);
         }
     }
 
@@ -118,12 +121,12 @@ class FetchFeedTask extends AsyncTask<Void,Void,Boolean> {
                         FeedModel item = new FeedModel(link,title,description);
                         items.add(item);
                     }
-                }
 
-                title = null;
-                description=null;
-                link=null;
-                isItem=false;
+                    title = null;
+                    description=null;
+                    link=null;
+                    isItem=false;
+                }
 
             }
         } finally {

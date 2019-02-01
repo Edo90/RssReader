@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.widget.Toast;
 
 import com.example.android.rssreader.model.FeedModel;
 
@@ -25,8 +24,8 @@ public class NewsActivity extends AppCompatActivity {
         //adapter.insert(generateFakeData());
         //rvNews.setAdapter(adapter);
         rvNews.setLayoutManager(new LinearLayoutManager(this));
-        Toast.makeText(this, "la posicion encontrada es "+link, Toast.LENGTH_SHORT).show();
-        new FetchFeedTask(String.valueOf(link),rvNews,adapter).execute((Void) null);
+        new FetchFeedTask(String.valueOf(link),rvNews,adapter, this.getApplicationContext()).execute((Void) null);
+
 
     }
 
