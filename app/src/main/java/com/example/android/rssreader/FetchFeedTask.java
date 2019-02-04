@@ -18,7 +18,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-class FetchFeedTask extends AsyncTask<Void,Void,Boolean> {
+class FetchFeedTask extends AsyncTask<Void, Void, Boolean> {
     private String urlLink;
     private RecyclerView rvNews;
     private rvNewsAdapter rvNewsAdapter;
@@ -32,7 +32,6 @@ class FetchFeedTask extends AsyncTask<Void,Void,Boolean> {
         this.context = newsActivity;
     }
 
-    //TODO:Recordar colocar el swipelayoute true
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
@@ -40,7 +39,7 @@ class FetchFeedTask extends AsyncTask<Void,Void,Boolean> {
 
     @Override
     protected void onPostExecute(Boolean success) {
-        if(success){
+        if (success) {
             rvNewsAdapter adapter = new rvNewsAdapter(context);
             adapter.insert(feedModelList);
             rvNews.setAdapter(adapter);
@@ -49,10 +48,10 @@ class FetchFeedTask extends AsyncTask<Void,Void,Boolean> {
 
     @Override
     protected Boolean doInBackground(Void... voids) {
-        if(TextUtils.isEmpty(urlLink)) return false;
+        if (TextUtils.isEmpty(urlLink)) return false;
 
         try {
-            if(!urlLink.startsWith("http://") && !urlLink.startsWith("https://"))
+            if (!urlLink.startsWith("http://") && !urlLink.startsWith("https://"))
                 urlLink = "http://" + urlLink;
 
             URL url = new URL(urlLink);
@@ -71,31 +70,31 @@ class FetchFeedTask extends AsyncTask<Void,Void,Boolean> {
 
     private List<FeedModel> parseFeed(InputStream inputStream) throws XmlPullParserException, IOException {
         boolean isItem = false;
-        String title = null,description = null,link =null;
+        String title = null, description = null, link = null;
         List<FeedModel> items = new ArrayList<>();
         try {
             XmlPullParser xmlPullParser = Xml.newPullParser();
-            xmlPullParser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES,false);
-            xmlPullParser.setInput(inputStream,null);
+            xmlPullParser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false);
+            xmlPullParser.setInput(inputStream, null);
 
             xmlPullParser.nextTag();
 
-            while (xmlPullParser.next() != XmlPullParser.END_DOCUMENT){
+            while (xmlPullParser.next() != XmlPullParser.END_DOCUMENT) {
                 int eventType = xmlPullParser.getEventType();
 
                 String name = xmlPullParser.getName();
-                if(name==null) continue;
+                if (name == null) continue;
 
-                if(eventType == XmlPullParser.END_TAG){
-                    if(name.equalsIgnoreCase("item")){
+                if (eventType == XmlPullParser.END_TAG) {
+                    if (name.equalsIgnoreCase("item")) {
                         isItem = false;
                     }
                     continue;
                 }
 
 
-                if(eventType == xmlPullParser.START_TAG){
-                    if(name.equalsIgnoreCase("item")){
+                if (eventType == xmlPullParser.START_TAG) {
+                    if (name.equalsIgnoreCase("item")) {
                         isItem = true;
                         continue;
                     }
@@ -103,29 +102,29 @@ class FetchFeedTask extends AsyncTask<Void,Void,Boolean> {
 
                 String result = "";
 
-                if(xmlPullParser.next() == XmlPullParser.TEXT){
+                if (xmlPullParser.next() == XmlPullParser.TEXT) {
                     result = xmlPullParser.getText();
                     xmlPullParser.nextTag();
                 }
 
-                if(name.equalsIgnoreCase("title")){
+                if (name.equalsIgnoreCase("title")) {
                     title = result;
-                }else if(name.equalsIgnoreCase("link")){
+                } else if (name.equalsIgnoreCase("link")) {
                     link = result;
-                }else if(name.equalsIgnoreCase("description")){
+                } else if (name.equalsIgnoreCase("description")) {
                     description = result;
                 }
 
-                if(title != null && link != null && description != null){
-                    if(isItem){
-                        FeedModel item = new FeedModel(link,title,description);
+                if (title != null && link != null && description != null) {
+                    if (isItem) {
+                        FeedModel item = new FeedModel(link, title, description);
                         items.add(item);
                     }
 
                     title = null;
-                    description=null;
-                    link=null;
-                    isItem=false;
+                    description = null;
+                    link = null;
+                    isItem = false;
                 }
 
             }

@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">My News</string>
+    <string name="confirmMessage">Esta seguro que desea eliminar este Feed?</string>
+    <string name="Ok">Ok</string>
+    <string name="No">No</string>
+    <string name="delete_item_confirm_text">Esta Seguro que desea eliminar este Feed?</string>
 </resources>

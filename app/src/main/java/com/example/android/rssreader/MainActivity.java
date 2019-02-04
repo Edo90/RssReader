@@ -34,7 +34,6 @@ public class MainActivity extends AppCompatActivity {
         rbAddNewFeed = findViewById(R.id.rbAddNewFeed);
         rssViewModel = ViewModelProviders.of(this).get(RssViewModel.class);
 
-
         final rvRssAdapter adapter = new rvRssAdapter(this,rssViewModel);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -45,6 +44,8 @@ public class MainActivity extends AppCompatActivity {
                 adapter.insertRss(rssModels);
             }
         });
+
+
 
         rbAddNewFeed.setOnClickListener(new View.OnClickListener() {
             @Override
