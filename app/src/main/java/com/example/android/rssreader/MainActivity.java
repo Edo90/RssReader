@@ -5,6 +5,7 @@ import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -33,8 +34,9 @@ public class MainActivity extends AppCompatActivity {
         RecyclerView recyclerView = findViewById(R.id.recyclerview);
         rbAddNewFeed = findViewById(R.id.rbAddNewFeed);
         rssViewModel = ViewModelProviders.of(this).get(RssViewModel.class);
+        FragmentManager fm = getSupportFragmentManager();
 
-        final rvRssAdapter adapter = new rvRssAdapter(this,rssViewModel);
+        final rvRssAdapter adapter = new rvRssAdapter(this, rssViewModel, fm);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 

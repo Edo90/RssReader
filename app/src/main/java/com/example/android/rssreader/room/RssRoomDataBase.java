@@ -11,7 +11,7 @@ import android.support.annotation.NonNull;
 import com.example.android.rssreader.dao.RssDao;
 import com.example.android.rssreader.model.RSSModel;
 
-@Database(entities = {RSSModel.class}, version = 2)
+@Database(entities = {RSSModel.class}, version = 2, exportSchema = false)
 public abstract class RssRoomDataBase extends RoomDatabase {
   //  public abstract FeedModel feedModel();
     public abstract RssDao rssDao();
