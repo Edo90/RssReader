@@ -18,6 +18,7 @@ import com.example.android.rssreader.model.RSSModel;
 import com.example.android.rssreader.viewmodel.RssViewModel;
 
 import java.util.List;
+import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -47,8 +48,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
-
         rbAddNewFeed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -61,13 +60,12 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
         if(requestCode == NEW_RSS_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK){
-            FeedDto feedDto = (FeedDto) data.getSerializableExtra(NewFeed.EXTRA_REPLY);
+            FeedDto feedDto = (FeedDto) Objects.requireNonNull(data).getSerializableExtra(NewFeed.EXTRA_REPLY);
             RSSModel rssModel = new RSSModel(feedDto.getLink(),feedDto.getName());
             rssViewModel.insert(rssModel);
         } else {
-            Toast.makeText(this, "No se guardo", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "El feed proporcionado no pudo ser guardado", Toast.LENGTH_SHORT).show();
         }
     }
 }

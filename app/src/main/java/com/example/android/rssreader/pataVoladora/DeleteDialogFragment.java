@@ -15,12 +15,15 @@ import com.example.android.rssreader.R;
 import com.example.android.rssreader.model.RSSModel;
 import com.example.android.rssreader.viewmodel.RssViewModel;
 
+import java.util.Objects;
+
 public class DeleteDialogFragment extends DialogFragment {
 
-    private static RssViewModel rssViewModel;
+    private static RSSModel model;
     private TextView deleteTextTitle;
     private Button deleteButton;
     private Button cancelButton;
+    private RssViewModel rssViewModel;
 
     public DeleteDialogFragment() {
     }
@@ -28,7 +31,7 @@ public class DeleteDialogFragment extends DialogFragment {
     public static DeleteDialogFragment newInstance(RSSModel model) {
         DeleteDialogFragment fragment = new DeleteDialogFragment();
         Bundle args = new Bundle();
-        args.putString("titleToBeDeleted", model.getName());
+        args.putParcelable("RSS_MODEL", model);
         fragment.setArguments(args);
         return fragment;
     }
@@ -44,19 +47,21 @@ public class DeleteDialogFragment extends DialogFragment {
         deleteTextTitle = view.findViewById(R.id.title_to_be_deleted);
         deleteButton = view.findViewById(R.id.bDelete);
         cancelButton = view.findViewById(R.id.bCancel);
-        String titleToBeDeleted = getArguments().getString("titleToBeDeleted");
-        deleteTextTitle.setText(titleToBeDeleted);
+        if (getArguments() != null)
+            model = getArguments().getParcelable("RSS_MODEL");
+        deleteTextTitle.setText(model != null ? model.getName() : null);
         setListeners();
+        rssViewModel = new RssViewModel(Objects.requireNonNull(getActivity()).getApplication());
         super.onViewCreated(view, savedInstanceState);
     }
 
 
     private void setListeners() {
-
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(), "Deleted Clicked", Toast.LENGTH_SHORT).show();
+                rssViewModel.delete(model.getId());
+                Toast.makeText(getContext(), "El feed ha sido eliminado con exito", Toast.LENGTH_SHORT).show();
                 closeFragment();
             }
         });
