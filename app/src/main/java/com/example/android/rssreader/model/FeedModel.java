@@ -7,12 +7,20 @@ public class FeedModel {
     String link;
     String title;
     String description;
+    String picture;
 
 
     public FeedModel(String link, String title, String description) {
         this.link = link;
         this.title = title;
         this.description = description;
+    }
+
+    public FeedModel(String link, String title, String description, String picture) {
+        this.link = link;
+        this.title = title;
+        this.description = description;
+        this.picture = picture;
     }
 
     public int getId() {
@@ -45,5 +53,13 @@ public class FeedModel {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getPicture() {
+        return picture;
+    }
+
+    public void setPicture(String picture) {
+        this.picture = picture;
     }
 }

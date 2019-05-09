@@ -16,6 +16,14 @@
         android:textStyle="bold"
         tools:text="Titulo" />
 
+    <android.support.v7.widget.AppCompatImageView
+        android:id="@+id/newsImage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="4dp"
+        tools:src="@tools:sample/avatars" />
+
+
     <TextView
         android:id="@+id/descriptionText"
         android:layout_width="match_parent"
@@ -30,15 +38,14 @@
         android:layout_height="wrap_content"
         android:id="@+id/tvLink"
         android:layout_marginBottom="6dp"
-        android:background="@android:color/darker_gray"
         android:textSize="16sp"
         android:textColor="@android:color/holo_blue_dark"
         tools:text="http://www.link.com" />
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/colorAccent" />
+        android:layout_height="2dp"
+        android:background="@android:color/darker_gray" />
 
 
 </LinearLayout>

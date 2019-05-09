@@ -10,6 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.example.android.rssreader.Utils.StringUtils;
 import com.example.android.rssreader.model.FeedModel;
 
 import java.util.List;
@@ -46,6 +48,10 @@ public class rvNewsAdapter extends RecyclerView.Adapter<NewsViewHolder> {
             newsViewHolder.tvTitle.setText(current.getTitle());
             newsViewHolder.tvDescription.setText(limitString);
             newsViewHolder.tvLink.setText(current.getLink());
+            if (StringUtils.isNullOrEmpty(current.getPicture()))
+                newsViewHolder.ivNewsImage.setVisibility(View.GONE);
+            else
+                Glide.with(this.context).asBitmap().load(current.getPicture()).override(600, 200).into(newsViewHolder.ivNewsImage);
         }else {
             newsViewHolder.tvTitle.setText("No Data");
             newsViewHolder.tvDescription.setText("No Data");

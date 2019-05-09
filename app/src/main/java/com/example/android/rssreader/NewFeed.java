@@ -17,7 +17,6 @@ public class NewFeed extends AppCompatActivity {
 
     private EditText mNameView;
     private EditText mLinkView;
-    private Button bSaveRss;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +25,7 @@ public class NewFeed extends AppCompatActivity {
 
         mNameView = findViewById(R.id.etName);
         mLinkView = findViewById(R.id.etLink);
-        bSaveRss = findViewById(R.id.bSaveRss);
+        Button bSaveRss = findViewById(R.id.bSaveRss);
 
         bSaveRss.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,33 +57,4 @@ public class NewFeed extends AppCompatActivity {
 
     }
 
-//    private class ValidateLink extends AsyncTask<String,Void,Boolean> {
-//
-//        @Override
-//        protected Boolean doInBackground(String... strings) {
-//            try {
-//                HttpURLConnection conn = (HttpURLConnection) new URL(strings[0]).openConnection();
-//                conn.setUseCaches(false);
-//                //  conn.connect();
-//                int status = conn.getResponseCode();
-//                conn.disconnect();
-//                if(status == 200){
-//                    return true;
-//                }else {
-//                    return false;
-//                }
-//
-//            } catch (MalformedURLException e) {
-//                e.printStackTrace();
-//                return false;
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//                return false;
-//            } catch (Exception e){
-//                e.printStackTrace();
-//                return false;
-//            }
-//        }
-//
-//    }
 }

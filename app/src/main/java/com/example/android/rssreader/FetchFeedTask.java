@@ -6,6 +6,8 @@ import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.Xml;
 
+import com.example.android.rssreader.Utils.RegexUtils;
+import com.example.android.rssreader.Utils.StringUtils;
 import com.example.android.rssreader.model.FeedModel;
 
 import org.xmlpull.v1.XmlPullParser;
@@ -70,7 +72,7 @@ class FetchFeedTask extends AsyncTask<Void, Void, Boolean> {
 
     private List<FeedModel> parseFeed(InputStream inputStream) throws XmlPullParserException, IOException {
         boolean isItem = false;
-        String title = null, description = null, link = null;
+        String title = null, description = null, link = null, image = null;
         List<FeedModel> items = new ArrayList<>();
         try {
             XmlPullParser xmlPullParser = Xml.newPullParser();
@@ -112,18 +114,28 @@ class FetchFeedTask extends AsyncTask<Void, Void, Boolean> {
                 } else if (name.equalsIgnoreCase("link")) {
                     link = result;
                 } else if (name.equalsIgnoreCase("description")) {
-                    description = result;
+                    image = RegexUtils.getImageFromString(result);
+                    description = result.replaceAll("<img([\\w\\W]+?)/>", "");
+                    description = description.replaceAll("<img([\\w\\W]+?)>", "");
+                    description = description.replaceAll("<p>", "");
+                    description = description.replaceAll("</p>", "");
+                    description = description.replaceAll("<b>", "");
+                    description = description.replaceAll("</b>", "");
                 }
 
                 if (title != null && link != null && description != null) {
                     if (isItem) {
-                        FeedModel item = new FeedModel(link, title, description);
+                        FeedModel item;
+                        if (!StringUtils.isNullOrEmpty(image))
+                            item = new FeedModel(link, title, description, image);
+                        else item = new FeedModel(link, title, description);
                         items.add(item);
                     }
 
                     title = null;
                     description = null;
                     link = null;
+                    image = null;
                     isItem = false;
                 }
 

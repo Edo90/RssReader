@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -17,6 +16,13 @@
         android:textStyle="bold"
         tools:text="Titulo" />
 
+    <android.support.v7.widget.AppCompatImageView
+        android:id="@+id/newsImage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="4dp"
+        tools:src="@tools:sample/avatars" />
+
     <TextView
         android:id="@+id/descriptionText"
         android:layout_width="match_parent"
@@ -27,20 +33,17 @@
         tools:text="lkasd klakds laksd askdl kasdlk ald kal kals laksda" />
 
     <TextView
+        android:id="@+id/tvLink"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/tvLink"
         android:layout_marginBottom="6dp"
-        android:padding="4dp"
-        android:background="@android:color/darker_gray"
-        android:textSize="12sp"
         android:textColor="@android:color/holo_blue_dark"
+        android:textSize="12sp"
         tools:text="http://www.link.com" />
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="1.5dp"
-        android:background="@color/colorAccent" />
-
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray" />
 
 </LinearLayout>

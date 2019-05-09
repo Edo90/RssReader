@@ -1,6 +1,7 @@
 package com.example.android.rssreader;
 
 import android.support.annotation.NonNull;
+import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
@@ -8,6 +9,7 @@ import android.widget.TextView;
 class NewsViewHolder extends RecyclerView.ViewHolder {
 
     final TextView tvTitle,tvDescription,tvLink;
+    final AppCompatImageView ivNewsImage;
 
     public NewsViewHolder(@NonNull View itemView) {
         super(itemView);
@@ -15,7 +17,7 @@ class NewsViewHolder extends RecyclerView.ViewHolder {
         tvTitle = itemView.findViewById(R.id.titleText);
         tvDescription = itemView.findViewById(R.id.descriptionText);
         tvLink = itemView.findViewById(R.id.tvLink);
-
+        ivNewsImage = itemView.findViewById(R.id.newsImage);
 
     }
 }
